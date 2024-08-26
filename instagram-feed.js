@@ -1,33 +1,154 @@
-document.addEventListener('DOMContentLoaded', function () {
-    const accessToken = 'EAARtC8rn31EBO2OI9tYntArJUpMg5bmfN9ccm5w1SSUEw1CbxvPbfGtuseChYr3082zaDTN583siByXBj4oAGiZBoLJgNLDfk6hmfq7wRxkyJU5G6mpgHgXzuGwSasm2ZBqMb6081GZACOrBCNp6QzXFbf3TszUWw1BY4w39WZC9JlI2FHACVVmpV30Xh3SF1yzIV4u8K4bga7Xcvjr3QhcSxSwy0oKLGIjSOaZBmg62xOEy31zcXsZBhGbD0ZD'; // Replace with your access token
-    const userId = 'sortedagain'; // Replace with your Instagram User ID
-    const instagramFeed = document.getElementById('instagram-feed');
+/* Resetting some default styles */
+body, h1, h2, p, a, input, textarea {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-    fetch(`https://graph.instagram.com/me/media?fields=id,caption,media_type,media_url,thumbnail_url,permalink&access_token=${accessToken}`)
-        .then(response => response.json())
-        .then(data => {
-            data.data.forEach(post => {
-                const postElement = document.createElement('div');
-                postElement.classList.add('instagram-post');
+/* Body styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
 
-                if (post.media_type === 'IMAGE' || post.media_type === 'CAROUSEL_ALBUM') {
-                    postElement.innerHTML = `
-                        <a href="${post.permalink}" target="_blank">
-                            <img src="${post.media_url}" alt="${post.caption}" />
-                        </a>
-                    `;
-                } else if (post.media_type === 'VIDEO') {
-                    postElement.innerHTML = `
-                        <a href="${post.permalink}" target="_blank">
-                            <video controls>
-                                <source src="${post.media_url}" type="video/mp4">
-                            </video>
-                        </a>
-                    `;
-                }
+/* Header styling */
+header {
+    background-color: #000;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
 
-                instagramFeed.appendChild(postElement);
-            });
-        })
-        .catch(error => console.error('Error fetching Instagram posts:', error));
-});
+/* Navigation styling */
+nav {
+    background-color: #333;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+}
+
+nav a {
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 20px;
+    text-decoration: none;
+}
+
+nav a:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+/* Landing Page / Video Page styling */
+.landing-page {
+    padding: 20px;
+    text-align: center;
+}
+
+.landing-page h2 {
+    color: #333;
+}
+
+iframe {
+    width: 80%;
+    max-width: 560px;
+    height: 315px;
+    margin: 20px auto;
+    display: block;
+}
+
+/* Instagram Feed Page styling */
+.instagram-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: #fff;
+    text-align: center;
+}
+
+.instagram-page h2 {
+    color: #333;
+}
+
+.instagram-page p {
+    color: #666;
+    margin-bottom: 20px;
+}
+
+#instagram-feed {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 80%;
+    max-width: 1000px;
+}
+
+.instagram-post {
+    width: 300px;
+    margin: 10px;
+    border: 2px solid #ccc;
+    padding: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.instagram-post img, .instagram-post video {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Contact Page styling */
+.contact-page {
+    padding: 20px;
+    text-align: center;
+    background-color: #f9f9f9;
+}
+
+.contact-page h2 {
+    color: #333;
+}
+
+.contact-form {
+    max-width: 500px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.contact-form label {
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.contact-form input, .contact-form textarea {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.contact-form input[type="submit"] {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.contact-form input[type="submit"]:hover {
+    background-color: #555;
+}
+
+/* Footer styling */
+footer {
+    background-color: #000;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+}
+
